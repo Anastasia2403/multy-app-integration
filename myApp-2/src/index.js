@@ -1,11 +1,11 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App2 from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "@auth0/auth0-react";
-import history from "./utils/history";
-import { getConfig } from "./config";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App2 from './App';
+import * as serviceWorker from './serviceWorker';
+import { Auth0Provider } from '@auth0/auth0-react';
+import history from './utils/history';
+import { getConfig } from './config';
 
 const onRedirectCallback = (appState) => {
   history.push(
@@ -25,15 +25,14 @@ const providerConfig = {
     redirect_uri: window.location.origin,
     ...(config.audience ? { audience: config.audience } : null),
   },
+  // cacheLocation: 'localstorage',
 };
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <Auth0Provider
-    {...providerConfig}
-  >
+  <Auth0Provider {...providerConfig}>
     <App2 />
-  </Auth0Provider>,
+  </Auth0Provider>
 );
 
 // If you want your app to work offline and load faster, you can change
