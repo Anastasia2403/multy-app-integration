@@ -1,24 +1,21 @@
-import React, { useState } from "react";
-import { Button, Alert } from "reactstrap";
-import Highlight from "../components/Highlight";
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { getConfig } from "../config";
-import Loading from "../components/Loading";
+import React, { useState } from 'react';
+import { Button, Alert } from 'reactstrap';
+import Highlight from '../components/Highlight';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import { getConfig } from '../config';
+import Loading from '../components/Loading';
 
 export const ExternalApiComponent = () => {
-  const { apiOrigin = "http://localhost:3001", audience } = getConfig();
+  const { apiOrigin = 'http://localhost:3001', audience } = getConfig();
 
   const [state, setState] = useState({
     showResult: false,
-    apiMessage: "",
+    apiMessage: '',
     error: null,
   });
 
-  const {
-    getAccessTokenSilently,
-    loginWithPopup,
-    getAccessTokenWithPopup,
-  } = useAuth0();
+  const { getAccessTokenSilently, loginWithPopup, getAccessTokenWithPopup } =
+    useAuth0();
 
   const handleConsent = async () => {
     try {
@@ -85,14 +82,14 @@ export const ExternalApiComponent = () => {
   };
 
   return (
-    <>
-      <div className="mb-5">
-        {state.error === "consent_required" && (
-          <Alert color="warning">
-            You need to{" "}
+    <div className='mx-4'>
+      <div className='mb-5'>
+        {state.error === 'consent_required' && (
+          <Alert color='warning'>
+            You need to{' '}
             <a
-              href="#/"
-              class="alert-link"
+              href='#/'
+              class='alert-link'
               onClick={(e) => handle(e, handleConsent)}
             >
               consent to get access to users api
@@ -100,12 +97,12 @@ export const ExternalApiComponent = () => {
           </Alert>
         )}
 
-        {state.error === "login_required" && (
-          <Alert color="warning">
-            You need to{" "}
+        {state.error === 'login_required' && (
+          <Alert color='warning'>
+            You need to{' '}
             <a
-              href="#/"
-              class="alert-link"
+              href='#/'
+              class='alert-link'
               onClick={(e) => handle(e, handleLoginAgain)}
             >
               log in again
@@ -114,7 +111,7 @@ export const ExternalApiComponent = () => {
         )}
 
         <h1>External API</h1>
-        <p className="lead">
+        <p className='lead'>
           Ping an external API by clicking the button below.
         </p>
 
@@ -126,27 +123,27 @@ export const ExternalApiComponent = () => {
         </p>
 
         {!audience && (
-          <Alert color="warning">
+          <Alert color='warning'>
             <p>
               You can't call the API at the moment because your application does
               not have any configuration for <code>audience</code>, or it is
               using the default value of <code>YOUR_API_IDENTIFIER</code>. You
               might get this default value if you used the "Download Sample"
-              feature of{" "}
-              <a href="https://auth0.com/docs/quickstart/spa/react">
+              feature of{' '}
+              <a href='https://auth0.com/docs/quickstart/spa/react'>
                 the quickstart guide
               </a>
               , but have not set an API up in your Auth0 Tenant. You can find
-              out more information on{" "}
-              <a href="https://auth0.com/docs/api">setting up APIs</a> in the
+              out more information on{' '}
+              <a href='https://auth0.com/docs/api'>setting up APIs</a> in the
               Auth0 Docs.
             </p>
             <p>
               The audience is the identifier of the API that you want to call
-              (see{" "}
-              <a href="https://auth0.com/docs/get-started/dashboard/tenant-settings#api-authorization-settings">
+              (see{' '}
+              <a href='https://auth0.com/docs/get-started/dashboard/tenant-settings#api-authorization-settings'>
                 API Authorization Settings
-              </a>{" "}
+              </a>{' '}
               for more info).
             </p>
 
@@ -172,8 +169,8 @@ export const ExternalApiComponent = () => {
         )}
 
         <Button
-          color="primary"
-          className="mt-5"
+          color='primary'
+          className='mt-5'
           onClick={callApi}
           disabled={!audience}
         >
@@ -181,17 +178,17 @@ export const ExternalApiComponent = () => {
         </Button>
       </div>
 
-      <div className="result-block-container">
+      <div className='result-block-container'>
         {state.showResult && (
-          <div className="result-block" data-testid="api-result">
-            <h6 className="muted">Result</h6>
+          <div className='result-block' data-testid='api-result'>
+            <h6 className='muted'>Result</h6>
             <Highlight>
               <span>{JSON.stringify(state.apiMessage, null, 2)}</span>
             </Highlight>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

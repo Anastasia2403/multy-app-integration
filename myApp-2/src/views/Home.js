@@ -1,12 +1,10 @@
-import React, { Fragment } from "react";
-
-import Hero from "../components/Hero";
-import Content from "../components/Content";
+import { AuthButton } from '../components/AuthButton';
 
 const Home = () => (
-  <Fragment>
-    <Hero />
-  </Fragment>
+  <div className='text-center hero'>
+    <h1>App 2(child app)</h1>
+    <AuthButton />
+  </div>
 );
 
 export default Home;
